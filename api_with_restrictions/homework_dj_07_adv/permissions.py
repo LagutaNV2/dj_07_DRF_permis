@@ -11,9 +11,10 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
         
         # Read permissions are allowed to any request,
         # so we'll always allow GET, HEAD or OPTIONS requests.
+        print(f'get_permission {obj.creator.id=}, {request.user.is_authenticated=}')
         if request.method in permissions.SAFE_METHODS:
             return True
         
         # Instance must have an attribute named `owner`.
-        return obj.owner == request.user
+        return obj.creator.id == request.user.id and request.user.is_authenticated
         

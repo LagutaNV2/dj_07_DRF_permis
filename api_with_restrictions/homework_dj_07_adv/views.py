@@ -28,11 +28,9 @@ class AdvertisementViewSet(ModelViewSet):
     queryset = Advertisement.objects.all()
     serializer_class = AdvertisementSerializer
     
-    pagination_class = [IsOwnerOrReadOnly]
-    
     filter_backends = [filters.DjangoFilterBackend]
-    # filter_fields = ['created_at', 'creator', 'status']
-    filter_class = AdvertisementFilter
+    filter_fields = ['created_at', 'creator', 'status']
+    # filter_class = AdvertisementFilter
     
     
     def get_permissions(self):
@@ -44,5 +42,10 @@ class AdvertisementViewSet(ModelViewSet):
         if self.action == 'create':
             return [IsAuthenticated()]
         else:
-            return [IsOwnerOrReadOnly]
-        
+            return [IsOwnerOrReadOnly()]
+    
+    def list(self, request):
+        list = Advertisement.objects.all()
+        queryset = AdvertisementFilter(data=request.GET, queryset=list, request=request).qs
+        serializer = AdvertisementSerializer(queryset, many=True)
+        return Response(serializer.data)

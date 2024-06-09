@@ -151,7 +151,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# # исправление косяков
-# DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# исправление косяков
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
