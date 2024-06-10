@@ -45,7 +45,7 @@ class AdvertisementViewSet(ModelViewSet):
             return [IsOwnerOrReadOnly()]
     
     def list(self, request):
-        list = Advertisement.objects.all()
-        queryset = AdvertisementFilter(data=request.GET, queryset=list, request=request).qs
+        Advertisements = Advertisement.objects.all()
+        queryset = AdvertisementFilter(data=request.GET, queryset=Advertisements, request=request).qs
         serializer = AdvertisementSerializer(queryset, many=True)
         return Response(serializer.data)

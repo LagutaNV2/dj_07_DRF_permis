@@ -33,7 +33,7 @@ Authorization: Token f3d5c3927ed236f0e4092bf2dc276cf3984a3e65
 ###
 
 # фильтрация по создателю
-GET http://localhost:8000/api/advertisements/?creator=1
+GET http://localhost:8000/api/advertisements/?creator=7
 
 Content-Type: application/json
 
